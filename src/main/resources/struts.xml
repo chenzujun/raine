@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 让struts2支持动态方法调用,使用叹号访问方法 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    
+    <!-- 是否启用开发模式(开发时设置为true,发布到生产环境后设置为false)-->
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- 每次HTTP请求系统都重新加载资源文件，有助于开发(开发时设置为true,发布到生产环境后设置为false) --> 
+    <constant name="struts.i18n.reload" value="true" />
+    
+    <!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开  --> 
+    <constant name="struts.configuration.xml.reload" value="true"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <action name="index">
+            <result type="redirectAction">
+                <param name="actionName">HelloWorld</param>
+                <param name="namespace">/example</param>
+            </result>
+        </action>
+    </package>
+
+
+</struts>
